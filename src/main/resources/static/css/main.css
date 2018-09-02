@@ -7,4 +7,11 @@ and open the template in the editor.
     Created on : Sep 3, 2018, 1:09:28 AM
     Author     : Sorabh86 <ssorabh.ssharma@gmail.com>
 */
+body{
+    background: #ccc;
+}
 
+.form-signin {
+    width: 300px;
+    margin: 80px auto;
+}
