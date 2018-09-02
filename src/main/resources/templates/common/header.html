@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:fragment="common-header">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="sorabh86">
+        <title>User Fronthand</title>
+        
+        <link rel="stylesheet" href="/css/main.css"/>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <div th:fragment="navbar">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand page-scroll" th:href="@{/userFront}">Home</a>
+                    </div>
+                    
+                    <!-- Toggle nav menu items -->
+                    <div id="navbar-ex-collapse" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="hidden">
+                                <a class="page-scroll" href="#page-scroll"></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/account/primaryAccount}">Primary</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a th:href="@{/account/savingAccount}">Saving</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/transfer/betweenAccounts}">Between Accounts</a></li>
+                                    <li><a th:href="@{/transfer/toSomeoneElse}">To Someone Else</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a th:href="@{/transfer/recipient}">Add/Edit Recipient</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/appointment/create}">Schedule an Appointment</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/user/profile}">Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a th:href="@{/logout}">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div> <!-- .navbar-collapse -->
+                    
+                    
+                </div>
+            </nav>
+        </div>
+        
+        <div th:fragment="body-bottom-scripts">
+            <script src="/js/main.js"></script>
+        </div>
+        
+    </body>
+</html>
