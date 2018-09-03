@@ -151,7 +151,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", enable=" + enable + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + savingsAccount + ", appointmentList=" + appointmentList + ", recipientList=" + recipientList + '}';
+        return "User{" + "userId=" + userId + ", username=" + username + ", password=" + password + 
+                ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + 
+                phone + ", enable=" + enable + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + 
+                savingsAccount + ", appointmentList=" + appointmentList + ", recipientList=" + recipientList + '}';
     }
     
 }
