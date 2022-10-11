@@ -5,8 +5,8 @@
  */
 package com.userfront.config;
 
-import com.userfront.service.UserServiceImpl.UserSecurityService;
 import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.userfront.service.UserServiceImpl.UserSecurityService;
 
 /**
  *
@@ -71,9 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 
     }
     
-    @Autowired
-    public void configureGlobal(AuthenticationManager auth) throws Exception {
+//    @Autowired
+//    public void configureGlobal(AuthenticationManager auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("User").password("password").roles("USER"); // This is in-memory authentication
 //        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-    }
+//    }
 }
