@@ -6,7 +6,12 @@
 package com.userfront.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.userfront.domain.security.Authority;
+import com.userfront.domain.security.UserRole;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +21,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -23,7 +30,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
-public class User {
+public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +45,7 @@ public class User {
     private String email;
     private String phone;
     
-    private boolean enable=true;
+    private boolean enabled=true;
     
     @OneToOne
     private PrimaryAccount primaryAccount;
@@ -52,6 +59,18 @@ public class User {
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Recipient> recipientList;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 
     public Long getUserId() {
         return userId;
@@ -109,12 +128,8 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
+    public void setEnabled(boolean enable) {
+        this.enabled = enable;
     }
 
     public PrimaryAccount getPrimaryAccount() {
@@ -153,8 +168,38 @@ public class User {
     public String toString() {
         return "User{" + "userId=" + userId + ", username=" + username + ", password=" + password + 
                 ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + 
-                phone + ", enable=" + enable + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + 
+                phone + ", enable=" + enabled + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + 
                 savingsAccount + ", appointmentList=" + appointmentList + ", recipientList=" + recipientList + '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
     
 }
